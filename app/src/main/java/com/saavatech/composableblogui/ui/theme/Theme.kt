@@ -1,5 +1,6 @@
 package com.saavatech.composableblogui.ui.theme
 
+import android.R.id.primary
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -15,16 +16,41 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
+
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+
+primary = DarkPrimary,
+onPrimary = DarkOnPrimary,
+primaryContainer = DarkPrimaryContainer,
+onPrimaryContainer = DarkOnPrimaryContainer,
+inversePrimary = DarkPrimaryInverse,
+secondary = DarkSecondary,
+onSecondary = DarkOnSecondary,
+secondaryContainer = DarkSecondaryContainer,
+onSecondaryContainer = DarkOnSecondaryContainer,
+tertiary = DarkTertiary,
+onTertiary = DarkOnTertiary,
+tertiaryContainer = DarkTertiaryContainer,
+onTertiaryContainer = DarkOnTertiaryContainer,
+error = DarkError,
+onError = DarkOnError,
+errorContainer = DarkErrorContainer,
+onErrorContainer = DarkOnErrorContainer,
+background = DarkBackground,
+onBackground = DarkOnBackground,
+surface = DarkSurface,
+onSurface = DarkOnSurface,
+inverseSurface = DarkInverseSurface,
+inverseOnSurface = DarkInverseOnSurface,
+    surfaceVariant = DarkSurfaceVariant,
+    onSurfaceVariant = DarkOnSurfaceVariant,
+outline = DarkOutline
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
+//    primary = Purple40,
+//    secondary = PurpleGrey40,
+//    tertiary = Pink40
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -35,6 +61,35 @@ private val LightColorScheme = lightColorScheme(
     onBackground = Color(0xFF1C1B1F),
     onSurface = Color(0xFF1C1B1F),
     */
+
+//    LightPrimary.also { primary = it },
+//     onPrimary : kotlin . Any ? = LightOnPrimary,
+primaryContainer = LightPrimaryContainer,
+onPrimaryContainer = LightOnPrimaryContainer,
+inversePrimary = LightPrimaryInverse,
+secondary = LightSecondary,
+onSecondary = LightOnSecondary,
+secondaryContainer = LightSecondaryContainer,
+onSecondaryContainer = LightOnSecondaryContainer,
+tertiary = LightTertiary,
+onTertiary = LightOnTertiary,
+tertiaryContainer = LightTertiaryContainer,
+onTertiaryContainer = LightOnTertiaryContainer,
+error = LightError,
+onError = LightOnError,
+errorContainer = LightErrorContainer,
+onErrorContainer = LightOnErrorContainer,
+background = LightBackground,
+onBackground = LightOnBackground,
+surface = LightSurface,
+onSurface = LightOnSurface,
+inverseSurface = LightInverseSurface,
+inverseOnSurface = LightInverseOnSurface,
+surfaceVariant = LightSurfaceVariant,
+onSurfaceVariant = LightOnSurfaceVariant,
+outline = LightOutline
+
+    
 )
 
 @Composable
@@ -53,6 +108,7 @@ fun ComposableBlogUITheme(
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
