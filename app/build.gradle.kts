@@ -50,6 +50,9 @@ android {
 }
 
 dependencies {
+    implementation("androidx.compose:compose-bom:2024.01.00")
+    implementation("androidx.datastore:datastore-core:1.0.0")
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
     val nav_version = "2.7.6"
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -69,4 +72,8 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("androidx.navigation:navigation-compose:$nav_version")
+
+
+    // Splash API
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

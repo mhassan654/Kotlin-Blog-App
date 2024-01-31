@@ -1,6 +1,7 @@
 package com.saavatech.composableblogui.ui.utils
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -65,7 +66,9 @@ fun NavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
             ModalDrawerSheet {
-                DrawerContent(menuItems){route ->
+                DrawerContent(
+                    Modifier.background(MaterialTheme.colorScheme.primaryContainer),
+                    menuItems){route ->
                     scope.launch {
                         drawerState.close()
                     }
@@ -93,6 +96,7 @@ fun NavigationDrawer(
 
 @Composable
 private fun DrawerContent(
+    modifier: Modifier,
     menus: Array<NavigationItem>,
     onMenuClick: (String)->Unit
 ){

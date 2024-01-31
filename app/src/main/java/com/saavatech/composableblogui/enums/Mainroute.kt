@@ -4,4 +4,5 @@ enum class MainRoute(value: String) {
     About("about"),
     Settings("settings"),
     Profile("profile"),
+    Splash("splash"),
 }

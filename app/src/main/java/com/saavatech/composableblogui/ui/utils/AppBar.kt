@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -26,32 +27,27 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppBar(title: String, icon: ImageVector, iconClickAction: ()->Unit){
+
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
 //            containerColor = MaterialTheme.colorScheme.primary,
-            titleContentColor = Color.White
+            titleContentColor = MaterialTheme.colorScheme.primaryContainer
         ),
         navigationIcon = {
-                IconButton(
-                    onClick = { iconClickAction.invoke()}) {
-                    Icon(
-                        imageVector = icon,
-                        contentDescription = "",
-                        Modifier
-                            .padding(horizontal = 12.dp)
-                            .background(Color.White)
-                            .clip(shape = RoundedCornerShape(2.dp))
 
-                    )
-                }
+            RoundedIconButton(
+                icon = icon,
+                onClick = { iconClickAction.invoke() },
+                contentDescription = "Add to favorites"
+            )
+
         },
         actions = {
-            IconButton(onClick = { /* do something */ }) {
-                Icon(
-                    imageVector = Icons.Filled.Search,
-                    contentDescription = "Localized description"
-                )
-            }
+            RoundedIconButton(
+                icon = Icons.Filled.Search,
+                onClick = {  },
+                contentDescription = "Add to favorites"
+            )
         },
         title = { Text(title) }
     )
