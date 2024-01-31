@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 fun AppBar(title: String, icon: ImageVector, iconClickAction: ()->Unit){
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
+//            containerColor = MaterialTheme.colorScheme.primary,
             titleContentColor = Color.White
         ),
         navigationIcon = {

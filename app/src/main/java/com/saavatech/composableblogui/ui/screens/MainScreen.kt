@@ -5,6 +5,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -63,42 +64,9 @@ fun MainScreen(drawerState: DrawerState) {
     ) {
               paddingValues ->
         Surface(modifier = Modifier.padding(8.dp)) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-              horizontalAlignment = Alignment.CenterHorizontally,
-//              verticalArrangement = Arrangement.Center
-            ) {
-//                header row definition
-                Row(
-                    modifier =  Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Bottom
-                ) {
-                    Text("Trending Blogs",
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.headlineMedium)
-                    Text("See all",
-                        color = MaterialTheme.colorScheme.primary,
-                        fontWeight = FontWeight.Bold,
-                        style = MaterialTheme.typography.labelSmall)
-                }
+            TrendingSection(paddingValues)
 
-                Spacer(modifier = Modifier.height(20.dp))
-
-                LazyRow {
-                    items(5) {
-                        PostCard()
-                        Spacer(modifier = Modifier.width(10.dp))
-                    }
-                }
-
-            }
         }
-
-
     }
     }
 }
@@ -113,26 +81,63 @@ fun MainScreenPreview(){
     MainScreen(drawerState = drawerState)
 }
 
+
+@Composable
+fun TrendingSection(paddingValues: PaddingValues){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(paddingValues),
+        horizontalAlignment = Alignment.CenterHorizontally,
+//              verticalArrangement = Arrangement.Center
+    ) {
+//                header row definition
+        Row(
+            modifier =  Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Text("Trending Blogs",
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.headlineMedium)
+            Text("See all",
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.labelSmall)
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        LazyRow {
+            items(5) {
+                PostCard()
+                Spacer(modifier = Modifier.width(20.dp))
+            }
+        }
+
+    }
+}
+
 @Composable
 fun PostCard(){
     ElevatedCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         modifier = Modifier
-            .size(width = 150.dp, height = 220.dp)
+            .size(width = 200.dp, height = 280.dp)
             .background(Color.Transparent)
-
     ) {
         Column(
-            modifier = Modifier.padding(6.dp),
+            modifier = Modifier.padding(8.dp),
             verticalArrangement = Arrangement.Top
         ) {
             RoundedCornerImage(
-                resourceId = R.drawable.cover_5,
+                resourceId = R.drawable.sample_image,
                 modifier = Modifier.fillMaxWidth(),
                 null,
             )
             Text(
-                text = "Elejksadkjgdf skgdfsgjfd sgdfvated",
+                text = "A Retro kitchen Trends That Are making a comeback, rules to follow when",
                 modifier = Modifier
                     .padding(2.dp),
                 fontWeight = FontWeight.Bold,
@@ -148,7 +153,7 @@ fun PostCard(){
                     painter = painterResource(id = R.drawable.avatar_icon),
                     contentDescription = null,
                     modifier = Modifier
-                        .size(30.dp)
+                        .size(25.dp)
 //            .height(200.dp) // Set the height as needed
                         .clip(shape = shapes.medium)
                 )

@@ -16,7 +16,7 @@ fun RoundedCornerImage(
     resourceId: Int,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
-    shape: RoundedCornerShape = RoundedCornerShape(4.dp) // Adjust the corner radius as needed
+    shape: RoundedCornerShape = RoundedCornerShape(8.dp) // Adjust the corner radius as needed
 ) {
     val shapes = Shapes(
         small = shape,
@@ -30,6 +30,6 @@ fun RoundedCornerImage(
         modifier = modifier
             .fillMaxWidth()
 //            .height(200.dp) // Set the height as needed
-            .clip(shape = shapes.medium)
+            .clip(shape = shapes.large)
     )
 }
