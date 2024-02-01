@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.ThumbUp
@@ -30,19 +30,21 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.saavatech.composableblogui.enums.MainRoute
 import com.saavatech.composableblogui.models.NavigationItem
 import com.saavatech.composableblogui.ui.screens.AboutScreen
 import com.saavatech.composableblogui.ui.screens.MainScreen
+import com.saavatech.composableblogui.ui.screens.PostDetailsScreen
 import com.saavatech.composableblogui.ui.screens.SettingsScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -59,7 +61,7 @@ fun NavigationDrawer(
         NavigationItem("Profile",Icons.Default.AccountCircle,null, MainRoute.Profile.name),
         NavigationItem("Notifications",Icons.Default.Email,null,null),
         NavigationItem("Settings",Icons.Default.Settings,null,null),
-        NavigationItem("Logout",Icons.Default.ExitToApp,null,null),
+        NavigationItem("Logout", Icons.AutoMirrored.Filled.ExitToApp,null,null),
     )
 
     ModalNavigationDrawer(
@@ -77,10 +79,15 @@ fun NavigationDrawer(
             }
         }
     ) {
-        NavHost(navController = navController,
+        NavHost(
+            navController = navController,
             startDestination = MainRoute.Profile.name){
+
             composable(MainRoute.Profile.name){
-                MainScreen(drawerState)
+                MainScreen(drawerState){
+                        navigationPostId
+                    -> navController.navigate("post_details/$navigationPostId")
+                }
             }
 
             composable(MainRoute.Settings.name){
@@ -90,6 +97,25 @@ fun NavigationDrawer(
             composable(MainRoute.About.name){
                 AboutScreen()
             }
+
+            composable(
+                route="post_details/{post_id}",
+                arguments = listOf(navArgument("post_id") {
+                    type = NavType.StringType
+                }),
+            ){navigationPostId->
+                PostDetailsScreen(navigationPostId.arguments!!.getInt("post_id"),null)
+            }
+
+//            composable(MainRoute.PostDetails.name,
+//                arguments = listOf(navArgument("post_id") {
+//                    type = NavType.StringType
+//                }),){
+//                PostDetailsScreen { navigationMealId
+//                    ->
+//                    navController.navigate("destination_meal_details/$navigationMealId")
+//                }
+//            }
         }
     }
 }

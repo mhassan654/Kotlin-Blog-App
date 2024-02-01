@@ -76,4 +76,17 @@ dependencies {
 
     // Splash API
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    //lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    //retrofit
+    implementation("com.google.code.gson:gson:2.10")
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation( "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6")
+    //    coil
+    implementation("io.coil-kt:coil-compose:2.5.0")
 }

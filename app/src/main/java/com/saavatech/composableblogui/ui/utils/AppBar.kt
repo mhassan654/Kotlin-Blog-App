@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -26,9 +27,14 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(title: String, icon: ImageVector, iconClickAction: ()->Unit){
+fun AppBar(
+    title: String,
+    icon: ImageVector,
+    actionIcon: ImageVector?,
+    iconClickAction: ()->Unit
+){
 
-    TopAppBar(
+    CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
 //            containerColor = MaterialTheme.colorScheme.primary,
             titleContentColor = MaterialTheme.colorScheme.primaryContainer
@@ -43,11 +49,13 @@ fun AppBar(title: String, icon: ImageVector, iconClickAction: ()->Unit){
 
         },
         actions = {
-            RoundedIconButton(
-                icon = Icons.Filled.Search,
-                onClick = {  },
-                contentDescription = "Add to favorites"
-            )
+            if (actionIcon != null) {
+                RoundedIconButton(
+                    icon = actionIcon,
+                    onClick = { iconClickAction.invoke() },
+                    contentDescription = "Share to others"
+                )
+            }
         },
         title = { Text(title) }
     )

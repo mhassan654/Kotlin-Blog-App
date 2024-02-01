@@ -86,8 +86,7 @@ inverseSurface = LightInverseSurface,
 inverseOnSurface = LightInverseOnSurface,
 surfaceVariant = LightSurfaceVariant,
 onSurfaceVariant = LightOnSurfaceVariant,
-outline = LightOutline
-
+outline = LightOutline,
     
 )
 

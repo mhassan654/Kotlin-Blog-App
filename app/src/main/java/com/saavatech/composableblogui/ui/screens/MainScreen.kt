@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
@@ -51,7 +53,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.saavatech.composableblogui.R
+import com.saavatech.composableblogui.enums.MainRoute
 import com.saavatech.composableblogui.ui.theme.ComposableBlogUITheme
 import com.saavatech.composableblogui.ui.utils.AppBar
 import com.saavatech.composableblogui.ui.utils.RoundedCornerImage
@@ -60,12 +64,12 @@ import kotlinx.coroutines.launch
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun MainScreen(drawerState: DrawerState) {
+fun MainScreen(drawerState: DrawerState,navigationCallback: (Any)->Unit) {
     val scope = rememberCoroutineScope()
     ComposableBlogUITheme {
     Scaffold(
         topBar = {
-            AppBar("Home", Icons.Default.Menu, iconClickAction = {
+            AppBar("Home", Icons.Default.Menu,Icons.Filled.Search, iconClickAction = {
                 scope.launch {
                     drawerState.apply {
                         if (isClosed) open() else close()
@@ -75,31 +79,32 @@ fun MainScreen(drawerState: DrawerState) {
         }
     ) {
               paddingValues ->
-        Surface(modifier = Modifier.padding(10.dp)) {
+        Surface{
             Column {
-                TrendingSection(paddingValues)
+                TrendingSection(paddingValues,navigationCallback)
                 Spacer(modifier = Modifier.height(10.dp))
-                PostsByCategory()
+                PostsByCategory(navigationCallback)
             }
         }
     }
     }
 }
 
-@Preview
-@Composable
-fun MainScreenPreview(){
-    // Create a sample DrawerState for preview
-    val drawerState = rememberDrawerState(DrawerValue.Closed)
-
-    // Call the MainScreen composable with the sample DrawerState
-    MainScreen(drawerState = drawerState)
-}
+//@Preview
+//@Composable
+//fun MainScreenPreview(){
+//    // Create a sample DrawerState for preview
+//    val drawerState = rememberDrawerState(DrawerValue.Closed)
+//
+//    // Call the MainScreen composable with the sample DrawerState
+//    MainScreen(drawerState = drawerState,null)
+//}
+//( Modifier.padding(12.dp).fillMaxSize())
 
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TrendingSection(paddingValues: PaddingValues){
+fun TrendingSection(paddingValues: PaddingValues,navigationCallback: (Any)->Unit){
     val pagerState = rememberPagerState(pageCount = {
         4
     })
@@ -110,7 +115,8 @@ fun TrendingSection(paddingValues: PaddingValues){
         Column(
             modifier = Modifier
                 .height(450.dp)
-                .padding(paddingValues)
+                .fillMaxSize()
+                .padding(12.dp)
             ,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -121,7 +127,7 @@ fun TrendingSection(paddingValues: PaddingValues){
                 verticalAlignment = Alignment.Bottom
             ) {
                 Text("Trending Blogs",
-                    color = MaterialTheme.colorScheme.primaryContainer,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold,
                     style = MaterialTheme.typography.headlineMedium)
                 Text("See all",
@@ -134,7 +140,7 @@ fun TrendingSection(paddingValues: PaddingValues){
 
             LazyRow {
                 items(5) {
-                    PostCard()
+                    PostCard(navigationCallback)
                     Spacer(modifier = Modifier.width(20.dp))
                 }
             }
@@ -150,7 +156,7 @@ fun TrendingSection(paddingValues: PaddingValues){
     ) {
         repeat(pagerState.pageCount) { iteration ->
             val color = if (pagerState.currentPage == iteration)
-                MaterialTheme.colorScheme.primaryContainer
+                MaterialTheme.colorScheme.primary
             else
                 Color.LightGray
             Box(
@@ -167,11 +173,11 @@ fun TrendingSection(paddingValues: PaddingValues){
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun PostsByCategory(){
+fun PostsByCategory(navigationCallback: (Any)->Unit){
 
     Column(
         modifier = Modifier
-            .background(MaterialTheme.colorScheme.background)
+            .background(MaterialTheme.colorScheme.onPrimaryContainer)
             .padding(2.dp),
     ) {
         val pagerState= rememberPagerState(pageCount ={3})
@@ -180,7 +186,7 @@ fun PostsByCategory(){
         TabRow(
             selectedTabIndex = pagerState.currentPage,
             containerColor =Color.Transparent,
-            contentColor = MaterialTheme.colorScheme.primaryContainer,
+            contentColor = MaterialTheme.colorScheme.primary,
             divider = {},
             indicator = {tabPosition->
                 TabRowDefaults.Indicator(
@@ -231,27 +237,27 @@ fun PostsByCategory(){
                 verticalArrangement = Arrangement.Center) {
                 LazyRow {
                     items(5) {
-                        PostCard()
+                        PostCard(navigationCallback)
                         Spacer(modifier = Modifier.width(20.dp))
                     }
                 }
-
             }
-
         }
     }
-
-
 }
 
 @Composable
-fun PostCard(){
+fun PostCard(navigationCallback: (Any)->Unit){
     ElevatedCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         modifier = Modifier
             .size(width = 200.dp, height = 280.dp)
             .background(Color.Transparent)
+            .clickable {
+//                println(1.toString())
+                navigationCallback(1)
+            }
     ) {
         Column(
             modifier = Modifier.padding(8.dp),
@@ -268,7 +274,6 @@ fun PostCard(){
                     .padding(2.dp),
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.bodyMedium
-//                            textAlign = TextAlign.Center,
             )
 
             Row(
@@ -280,7 +285,6 @@ fun PostCard(){
                     contentDescription = null,
                     modifier = Modifier
                         .size(25.dp)
-//            .height(200.dp) // Set the height as needed
                         .clip(shape = shapes.medium)
                 )
 
@@ -291,9 +295,7 @@ fun PostCard(){
                     Text("02/12/2021",
                         style = MaterialTheme.typography.bodySmall)
                 }
-
             }
         }
-
     }
 }

@@ -20,7 +20,7 @@ fun RoundedIconButton(
     icon: ImageVector,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    tint: Color = MaterialTheme.colorScheme.primaryContainer,
+    tint: Color = MaterialTheme.colorScheme.primary,
     contentDescription: String? = null
 ) {
         IconButton(

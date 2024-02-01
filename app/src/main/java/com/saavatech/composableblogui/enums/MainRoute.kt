@@ -5,4 +5,5 @@ enum class MainRoute(value: String) {
     Settings("settings"),
     Profile("profile"),
     Splash("splash"),
+    PostDetails("post_details/{post_id}"),
 }
