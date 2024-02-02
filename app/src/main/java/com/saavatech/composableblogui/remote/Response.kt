@@ -3,32 +3,32 @@ package com.saavatech.composableblogui.remote
 import com.google.gson.annotations.SerializedName
 
 data class RegisterResponse(
-    @field:SerializedName("error")
+    @SerializedName("error")
     val error: Boolean,
 
-    @field:SerializedName("message")
+    @SerializedName("message")
     val message: String
 )
 
-data class LoginResponse(
-    @field:SerializedName("error")
-    val error: Boolean,
-
-    @field:SerializedName("message")
-    val message: String,
-
-    @field:SerializedName("loginResult")
-    val loginResult: LoginResult
-)
+//data class LoginResponse(
+//    @SerializedName("error")
+//    val error: Boolean,
+//
+//    @SerializedName("message")
+//    val message: String,
+//
+//    @SerializedName("loginResult")
+//    val loginResult: LoginResult
+//)
 
 data class LoginResult(
-    @field:SerializedName("userId")
+    @SerializedName("userId")
     val userId: String,
 
-    @field:SerializedName("name")
+    @SerializedName("name")
     val name: String,
 
-    @field:SerializedName("token")
+    @SerializedName("token")
     val token: String
 )
 

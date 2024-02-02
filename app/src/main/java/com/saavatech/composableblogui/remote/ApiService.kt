@@ -1,5 +1,6 @@
 package com.saavatech.composableblogui.remote
 
+import com.saavatech.composableblogui.data.responses.LoginResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Field

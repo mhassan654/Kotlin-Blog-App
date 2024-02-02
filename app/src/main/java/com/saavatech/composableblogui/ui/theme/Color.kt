@@ -68,3 +68,4 @@ val DarkInverseSurface = Color(0xFFEAE1D9)
 val DarkPrimaryInverse = Color(0xFF624000)
 
 val TextColor = Color(0xFF1D1617)
+val TextInputBgColor = Color(0xFFF7F8F8)

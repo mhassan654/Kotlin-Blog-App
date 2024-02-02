@@ -46,6 +46,7 @@ import com.saavatech.composableblogui.ui.screens.AboutScreen
 import com.saavatech.composableblogui.ui.screens.MainScreen
 import com.saavatech.composableblogui.ui.screens.PostDetailsScreen
 import com.saavatech.composableblogui.ui.screens.SettingsScreen
+import com.saavatech.composableblogui.ui.screens.auth.RegisterScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -81,7 +82,7 @@ fun NavigationDrawer(
     ) {
         NavHost(
             navController = navController,
-            startDestination = MainRoute.Profile.name){
+            startDestination = MainRoute.Login.name){
 
             composable(MainRoute.Profile.name){
                 MainScreen(drawerState){
@@ -96,6 +97,10 @@ fun NavigationDrawer(
 
             composable(MainRoute.About.name){
                 AboutScreen()
+            }
+
+            composable(MainRoute.Login.name){
+                RegisterScreen()
             }
 
             composable(

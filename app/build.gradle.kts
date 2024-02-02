@@ -50,6 +50,7 @@ android {
 }
 
 dependencies {
+    //noinspection BomWithoutPlatform
     implementation("androidx.compose:compose-bom:2024.01.00")
     implementation("androidx.datastore:datastore-core:1.0.0")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
@@ -81,6 +82,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+//    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
     //retrofit
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
@@ -89,4 +91,8 @@ dependencies {
     implementation( "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.6")
     //    coil
     implementation("io.coil-kt:coil-compose:2.5.0")
+
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    implementation("androidx.compose.material:material-icons-extended:1.6.0")
 }

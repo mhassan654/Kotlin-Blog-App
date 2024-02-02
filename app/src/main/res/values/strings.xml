@@ -3,5 +3,11 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="hello">Hey there,</string>
     <string name="create_account">Create An Account</string>
+    <string name="login">Login To Your Account</string>
     <string name="welcome">Welcome Back</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="t_c">By continuing you accept our privacy policy and terms of use</string>
 </resources>
